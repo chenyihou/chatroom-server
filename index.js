@@ -1,0 +1,48 @@
+import express from 'express'
+import {
+    ApolloServer
+} from 'apollo-server-express'
+import models from './models'
+
+import {
+    fileLoader,
+    mergeResolvers,
+    mergeTypes
+} from 'merge-graphql-schemas';
+import path from 'path'
+import cors from 'cors'
+
+const SECRET = 'asiodfhoi1hoi23jnl1kejd';
+const SECRET2 = 'asiodfhoi1hoi23jnl1kejasdjlkfasdd';
+
+const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
+const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')))
+
+const app = express()
+app.use(cors())
+const server = new ApolloServer({
+    // These will be defined for both new or existing servers
+    typeDefs,
+    resolvers,
+    context: {
+        models,
+        user: {
+            id: 1,
+        },
+        SECRET,
+        SECRET2,
+    }
+});
+
+server.applyMiddleware({
+    app
+}); // app is from an existing express app
+
+
+models.sequelize.sync().then(() => {
+    app.listen({
+            port: 4000
+        }, () =>
+        console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+    )
+});
