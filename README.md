@@ -1,7 +1,7 @@
 ### chatroom
 ---
 
-* Hosted on [AWS (EC2)](http://99.79.9.127:4000/)
+* Hosted on [AWS (EC2)](http://99.79.9.127:4000/chatroom)
 * This aplication support basic register, login, using jsonwebtoken to ensure the security; basic live chat once you login
 
 * To use, first register a new user, then login
