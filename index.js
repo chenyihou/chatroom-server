@@ -30,6 +30,8 @@ const getUser = token=>{
     return user
 }
 
+app.use(express.static('public'))
+
 const server = new ApolloServer({
     // These will be defined for both new or existing servers
     typeDefs,
