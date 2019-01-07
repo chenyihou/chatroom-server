@@ -3,7 +3,8 @@ export default `
     id: Int!
     username: String!
     email: String!
-    teams: [Team!]!
+    region: [Region!]!
+    activity:[Activity!]
   }
   type Query {
     getUser(id: Int!): User!

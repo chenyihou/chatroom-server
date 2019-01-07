@@ -4,10 +4,15 @@ export default `
     id: Int!
     text: String!
     user: User!
-    channel: Channel!
+    created_at: String!
   }
 
+  type Query {
+    allMessages: [Message!]!
+  }
+
+
   type Mutation {
-    createMessage(channelId: Int!, text: String!): Boolean!
+    createMessage( text: String!): Message!
   }
 `;

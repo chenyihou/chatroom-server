@@ -3,7 +3,7 @@ import {
     ApolloServer
 } from 'apollo-server-express'
 import models from './models'
-
+import jwt from 'jsonwebtoken';
 import {
     fileLoader,
     mergeResolvers,
@@ -20,17 +20,36 @@ const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')))
 
 const app = express()
 app.use(cors())
+const getUser = token=>{
+    let user={}
+    try{
+        user = jwt.verify(token,SECRET).user
+    }catch(err){
+        user={id:1}
+    }
+    return user
+}
+
 const server = new ApolloServer({
     // These will be defined for both new or existing servers
     typeDefs,
     resolvers,
-    context: {
-        models,
-        user: {
-            id: 1,
-        },
-        SECRET,
-        SECRET2,
+    context: ({
+        req
+    }) => {
+        // get the user token from the headers
+        const token = req.headers.authorization || '';
+
+        // try to retrieve a user with the token
+        const user = getUser(token);
+        console.log("herel=token",token,"end token")
+        // add the user to the context
+        return {
+            models, 
+            user,
+            SECRET,
+            SECRET2,
+        };
     }
 });
 
@@ -39,7 +58,8 @@ server.applyMiddleware({
 }); // app is from an existing express app
 
 
-models.sequelize.sync().then(() => {
+models.sequelize.sync({
+}).then(() => {
     app.listen({
             port: 4000
         }, () =>

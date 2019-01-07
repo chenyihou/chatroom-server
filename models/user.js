@@ -25,10 +25,11 @@ export default (sequelize, DataTypes) => {
             }
         },
         password: DataTypes.STRING,
+        description: DataTypes.STRING,
     });
 
     User.associate = models => {
-        User.belongsToMany(models.Team, {
+        User.belongsToMany(models.Region, {
             through: 'member',
             foreignKey: {
                 name: 'userId',
@@ -36,8 +37,8 @@ export default (sequelize, DataTypes) => {
             },
         });
         // N:M
-        User.belongsToMany(models.Channel, {
-            through: 'channel_member',
+        User.belongsToMany(models.Activity, {
+            through: 'activity_member',
             foreignKey: {
                 name: 'userId',
                 field: 'user_id',

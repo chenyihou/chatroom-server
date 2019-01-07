@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize'
 
-const sequelize = new Sequelize('slack','postgres','zxczxc',{
+const sequelize = new Sequelize('findmatch','postgres','zxczxc',{
     dialect: 'postgres',
     define:{
         underscored:true
@@ -9,9 +9,9 @@ const sequelize = new Sequelize('slack','postgres','zxczxc',{
 
 const db={
     User: sequelize.import('./user'),
-    Channel: sequelize.import('./channel'),
+    Activity: sequelize.import('./activity'),
     Message: sequelize.import('./message'),
-    Team: sequelize.import('./team'),
+    Region: sequelize.import('./region'),
 
 }
 
