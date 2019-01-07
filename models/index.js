@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize'
 
-const sequelize = new Sequelize('findmatch','postgres','zxczxc',{
+const sequelize = new Sequelize('findmatch','postgres','Hcy64616883!',{
+    host:'postgres.c592vyslvlgs.ca-central-1.rds.amazonaws.com',
     dialect: 'postgres',
     define:{
         underscored:true

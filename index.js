@@ -31,7 +31,9 @@ const getUser = token=>{
 }
 
 app.use(express.static('public'))
-
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/public/index.html'));
+});
 const server = new ApolloServer({
     // These will be defined for both new or existing servers
     typeDefs,
