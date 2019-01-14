@@ -2,7 +2,7 @@
 ---
 
 * Hosted on [AWS (EC2)](http://99.79.9.127:4000/chatroom)
-* This aplication support basic register, login, using jsonwebtoken to ensure the security; basic live chat once you login
+* This aplication support basic register, login, using jsonwebtoken and password hashing to ensure the security; basic live chat once you login
 
 * To use, first register a new user, then login
 * The server will send a token to the client and reserve in local storage
